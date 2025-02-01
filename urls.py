@@ -1,44 +1,37 @@
+from django.urls import path
+from . import views
+from django.contrib.auth.views import LogoutView
 
-from django.urls import path,include
-from furniclove_app import views
-from django.contrib.auth import views as auth_views
-from django.contrib import admin
-#from .views import product_detail_with_variant
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('shop/', views.shop, name='shop'),
-    path('about/', views.about, name='about'),
-    path('services/', views.services, name='services'),
-    path('contact/', views.contact, name='contact'),
-    path('cart/', views.cart, name='cart'),
-    path('wishlist/', views.wishlist, name='wishlist'),
+    path('', views.admin_login, name='admin_login'),
+    path('admin_home/', views.admin_home, name='admin_home'),
+    path('admin_logout/', views.admin_logout, name='admin_logout'), 
 
 
-    path('signup/', views.signup_view, name='signup'),
-    path('otp/', views.otp_view, name='otp'),
-    path('resend_otp/', views.resend_otp, name='resend_otp'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
+    path('user_management/', views.user_management, name='user_management'),   
+    path('block-user/<int:user_id>/', views.block_user, name='block_user'),
+    path('activate-user/<int:user_id>/', views.activate_user, name='activate_user'),
 
-    path('checkout/', views.checkout_view, name='checkout'),
-    path('profile/', views.profile_view, name='profile'),
-
-   path('product/<int:product_id>/', views.product_detail, name='product_detail'),
-
-   path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
-
-  path('product/<int:product_id>/variant/<int:variant_id>/', views.product_detail, name='product_detail_with_variant'),  # Product with variant
-
-  path('place-order/', views.place_order, name='place_order'),
-  path('order-history/', views.order_history, name='order_history'),
-  path('order/<int:order_id>/', views.order_detail, name='order_detail'),
-
-   
-]
+    path('product-management/', views.product_management, name='product_management'),
+    path('add-product/', views.add_product, name='add_product'),
+    path('edit-product/<int:product_id>/', views.edit_product, name='edit_product'),
+    path('delete-product/<int:product_id>/', views.delete_product, name='delete_product'),
+    path('view-product/<int:product_id>/', views.view_product, name='view_product'),
 
 
+    path('product/<int:product_id>/variants/', views.variant_management, name='variant_management'),
+    path('product/<int:product_id>/add_variant/', views.add_variant, name='add_variant'),
+    path('variant/<int:variant_id>/edit/', views.edit_variant, name='edit_variant'),
+    path('variant/<int:variant_id>/delete/', views.delete_variant, name='delete_variant'),
 
+    path('category_management/', views.category_management, name='category_management'),
+    path('add_category/', views.add_category, name='add_category'),
+    path('edit_category/<int:category_id>/', views.edit_category, name='edit_category'),
+    path('delete_category/<int:category_id>/', views.delete_category, name='delete_category'),
 
-   
-    
+    path('order_management/', views.order_management, name='order_management'),  
+    path('admin/orders/', views.order_management, name='order_management'),
+    path('admin/order/<int:order_id>/', views.order_detail, name='order_detail'),
+    path('admin/order/edit/<int:order_id>/', views.order_edit, name='order_edit'),
+]    
